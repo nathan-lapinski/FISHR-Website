@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>FISHR Project</title>
+	<meta property="og:title" content="KellerLab + FISHR Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://kellerfishrproject.com" />
+    <meta property="og:description" content="FISHR Project is a tool for geneticists for rapidly locating IBD shared haplotypes." />
+    <link rel="stylesheet" type="text/css" href="public/css/site_normalize.css">
+	<link rel="stylesheet" type="text/css" href="public/css/site_style.css">
+</head>
+<body>
+	<section id="intro">
+		<header id="stick">
+			<div class="container">
+				<div id="logo">
+					<h1>KellerLab <span id="project_title">+ FISHR Project</span></h1>
+				</div>
+				<nav id="nav_links">
+					<ul>
+						<li><a href="#about">About</a></li>
+						<li><a href="#software">Software</a></li>
+						<li><a href="#documentation">Documentation</a></li>
+						<li><a href="#downloads">Downloads</a></li>
+						<li><a href="#contacts">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div class="tag">
+			<h2>The FISHR Project</h2>
+			<h3>Find IBD Shared Haplotypes Rapidly</h3>
+		</div>
+	</section> <!-- End of intro section-->
+	<section id="about">
+		<div class="container">
+			<div class="content">
+				<h2>About</h2>
+			</div>
+		</div>
+	</section>
+	<section id="software">
+		<div class="container">
+			<div class="content">
+				<h2>Software</h2>
+			</div>
+		</div>
+	</section>
+	<section id="documentation">
+		<div class="container">
+			<div class="content">
+				<h2>Documentation</h2>
+			</div>
+		</div>
+	</section>
+	<section id="downloads">
+		<div class="container">
+			<div class="content">
+				<h2>Downloads</h2>
+			</div>
+		</div>
+	</section>
+	<section id="contacts">
+		<div class="container">
+			<div class="content">
+				<h2>Contacts</h2>
+			</div>
+		</div>
+	</section>
+	<footer>
+    <div class="container">
+        <div class="content">
+            <p>© 2010‑2014 KellerLab. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="public/js/jquery.scrollTo.min.js"></script>
+<script src="public/js/jquery.localscroll.min.js"></script>
+<script src="public/js/jquery.sticky.min.js"></script>
+<script src="public/js/jquery.backstretch.min.js"></script>
+<script src="public/js/responsive-nav.min.js"></script>
+<script src="public/js/picturefill.min.js"></script>
+<script>
+	$.localSCroll({
+		offset: $('#stick').outerHeight() * - 0.7
+	});
+	$('#stick').sticky();
+	var navigation = responsiveNav('#nav', {
+		animate: true	
+	});
+	$('#intro').backstretch('public/img/cover.jpg');
+</script>
+</body>
+</html>
