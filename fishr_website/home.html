@@ -76,6 +76,7 @@
     </div>
 </footer>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="public/js/jquery-1.11.1.min.js"><\/script>')</script>
 <script src="public/js/jquery.scrollTo.min.js"></script>
 <script src="public/js/jquery.localscroll.min.js"></script>
 <script src="public/js/jquery.sticky.min.js"></script>
@@ -83,14 +84,14 @@
 <script src="public/js/responsive-nav.min.js"></script>
 <script src="public/js/picturefill.min.js"></script>
 <script>
-	$.localSCroll({
-		offset: $('#stick').outerHeight() * - 0.7
+	$.localScroll({
+	offset: $('#stick').outerHeight() * - 0.7
 	});
-	$('#stick').sticky();
-	var navigation = responsiveNav('#nav', {
+$('#stick').sticky();
+	var navigation = responsiveNav('#nav_links', {
 		animate: true	
 	});
-	$('#intro').backstretch('public/img/cover.jpg');
+$('#intro').backstretch('public/img/cover.jpg');
 </script>
 </body>
 </html>
