@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta content='width=device-width, initial-scale=1.0' name='viewport' />
+	<title>FISHR Project</title>
+	<meta property="og:title" content="KellerLab + FISHR Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://kellerfishrproject.com" />
+    <meta property="og:description" content="FISHR Project is a tool for geneticists for rapidly locating IBD shared haplotypes." />
+    <link rel="stylesheet" type="text/css" href="public/css/site_normalize.css">
+	<link rel="stylesheet" type="text/css" href="public/css/site_style.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://use.typekit.net/cgj8miu.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <link href="/public/css/ie.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <![endif]-->
+</head>
+<body>
+ <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+	<section id="intro">
+		<header id="stick">
+			<div class="container">
+				<div id="logo">
+					<h1>KellerLab + FISHR Project</h1>
+				</div>
+				<nav id="nav">
+					<ul>
+						<li><a href="#about">About</a></li>
+						<li><a href="#software">Software</a></li>
+						<li><a href="#documentation">Documentation</a></li>
+						<li><a href="#downloads">Downloads</a></li>
+						<li class="last"><a href="#contacts">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div class="tag">
+			<h2>THE FISHR PROJECT</h2>
+			<h3>Find IBD Shared Haplotypes Rapidly</h3>
+		</div>
+	</section> <!-- End of intro section-->
+	<section id="documentation">
+		<div class="container">
+			<div class="content">
+				<h2>Developer Documentation</h2>
+				<p>This page contains information for how to use and understand FISHR from the perspective of a software developer. For general information pertaining to users, see the <a href="user_documentation.html">user documentation</a> page<p>
+				<p>Links to the documentation can be found here:</p>
+				<ul>
+					<a href="userdocumentation.html"><li>User Documentation</li></a>
+					<a href="devdocumentation.html"><li>Developer Documentation</li></a>
+				</ul> 
+			</div>
+		</div>
+	</section>
+	<footer>
+	    <div class="container">
+	        <div class="content">
+	            <p>© 2010‑2014 KellerLab. All rights reserved.</p>
+	        </div>
+	    </div>
+	</footer>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="public/js/jquery-1.11.1.min.js"><\/script>')</script>
+<script src="public/js/jquery.scrollTo.min.js"></script>
+<script src="public/js/jquery.localscroll.min.js"></script>
+<script src="public/js/jquery.sticky.min.js"></script>
+<script src="public/js/jquery.backstretch.min.js"></script>
+<script src="public/js/responsive-nav.min.js"></script>
+<script src="public/js/picturefill.min.js"></script>
+<script>
+	$.localScroll({
+	offset: $('#stick').outerHeight() * - 0.7
+	});
+$('#stick').sticky();
+	var navigation = responsiveNav('#nav', {
+		animate: true	
+	});
+$('#intro').backstretch('public/img/cover.jpg');
+</script>
+</body>
+</html>
