@@ -27,7 +27,7 @@
 		<header id="stick">
 			<div class="container">
 				<div id="logo">
-					<h1>KellerLab + FISHR Project</h1>
+					<a href="home.html"><h1>KellerLab + FISHR Project</h1></a>
 				</div>
 				<nav id="nav">
 					<ul>
@@ -54,8 +54,8 @@
 				<ul>
 					<li><a href="#overview">FISHR Suite Overview</a></li>
 					<li><a href="#germline">Germline</a></li>
-					<li><a href="#errorfinder">Error Finder</a></li>
-					<li><a href="#errorfinderlowram">Error Finder Low-RAM</a></li>
+					<li><a href="#errorfinder">Fishr (Error Finder)</a></li>
+					<li><a href="#errorfinderlowram">Fishr Low-RAM</a></li>
 					<li><a href="#glparameterfinder">GL Parameter Finder</a></li>
 				</ul> 
 			</div>
@@ -66,7 +66,7 @@
 			<div class="content">
 				<h2>FISHR Suite Overview</h2>
 				<p>FISHR is a package of software programs that performs statistical analaysis on genetic data to find shared haplotype segements that are identical by descent (IBD).</p>
-				<p>It consits of three major programs (Germline, GL parameter finder, Error finder).</p>
+				<p>It consits of three major programs (Germline, GL parameter finder, Fishr). Note that sometimes, the programs Fishr and ErrorFinder are used interchangeably.</p>
 			</div>
 		</div>
 	</section>
@@ -87,21 +87,34 @@ GERMLINE is a program that was developed at the University of Columbia. It disco
 germline8 -pedfile [pedfile] -mapfile [mapfile] -outfile [output format of your choosing] -bin_out -err_hom [arguments] -err_het [arguments] -reduced -bits [some int value] -min_m [minimum length in cM] [method] -homoz
 					</code>
 				</pre>
+				<p>Now, we are finally ready to run FISHR. 
+As an aside, if you ever need to make changes to the current version of Germline (say, to add further customization), the way to compile Germline from the command line is:<p>
+				<pre class="codeblock-wrapper">
+					<code class="documentation-code-block">
+g++ -O2 -o [New GERMLINE Version] -I include GERMLINE_0001.cpp GERMLINE.cpp Share.cpp Chromosome.cpp ChromosomePair.cpp HMIndividualsExtractor.cpp MarkerSet.cpp Individual.cpp Individuals.cpp InputManager.cpp MatchFactory.cpp MatchesBuilder.cpp NucleotideMap.cpp PEDIndividualsExtractor.cpp Match.cpp PolymorphicIndividualsExtractor.cpp SNP.cpp SNPPositionMap.cpp SNPs.cpp
+					</code>
+				</pre>
 			</div>
 		</div>
 	</section>
 	<section id="errorfinder">
 		<div class="container">
 			<div class="content">
-				<h2>Error Finder</h2>
-				<p>The most up to date version of FISHR can be downloaded here. Older versions can be found on GitHub.</p>
+				<h2>Fishr (Error Finder)</h2>
+				<p>Once the data has been acquired and ran through GERMLINE, we are ready to begin processing it with one of the programs from the FISHR suite. FISHR currently supports three main programs:</p>
+				<ul>
+					<li>Fishr (Error Finder)</li>
+					<li>Low-Ram</li>
+					<li>GL_parameter_finder</li>
+				</ul>
+				<p>Each of these programs are described in more detail in their respective sections of this document. Fishr is responsible for performing the main statistical calculations. Low-Ram is a version of Fishr that is optimized for running in low-memory environments. GL_Parameter_Finder is used for determining certain empirical inputs to the Fishr/Low-Ram programs.</p>
 			</div>
 		</div>
 	</section>
 	<section id="errorfinderlowram">
 		<div class="container">
 			<div class="content">
-				<h2>Error Finder Low-RAM</h2>
+				<h2>Fishr Low-RAM</h2>
 				<p>The most up to date version of FISHR can be downloaded here. Older versions can be found on GitHub.</p>
 			</div>
 		</div>
