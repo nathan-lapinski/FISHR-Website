@@ -257,7 +257,7 @@ header #nav a{display:inline;background:transparent;padding:0;border-bottom:none
 	border-bottom:1px solid #e8e8e8;
 	padding:1.875em 0
 }
-#software, #downloads,#overview,#errorfinder{
+#software, #downloads,#overview,#errorfinder,#glparameterfinder{
 	background-color:#f4f4f4;
 }
 @media (min-width:600px){
@@ -265,7 +265,7 @@ header #nav a{display:inline;background:transparent;padding:0;border-bottom:none
 		padding:3.75em 0}
 }#about ul{margin-bottom:2em;padding:0}#about ul li{line-height:1.6}#about p.hero{font:300 1.125em/1.6 "ff-meta-serif-web-pro",Helvetica,Arial,sans-serif;color:#888}@media (min-width:600px){#about p.hero{font:300 1.25em/1.6 "ff-meta-serif-web-pro",Helvetica,Arial,sans-serif;color:#888}}.principles li{font-style:italic;color:#999;padding:.3125em 0;border-bottom:1px solid rgba(183,141,84,0.3)}@media (min-width:600px){.principles li{font-style:normal;padding:0;border:0}}.content{width:100%;float:right;margin-left:0;margin-right:0;clear:none}@media (min-width:768px){.content{width:82.85714%;float:left;margin-right:-100%;margin-left:8.57143%;clear:none}}
 .content h2:after{content:url(../img/underscore.png) no-repeat;padding-left:.3125em}
-.bruno, .gustavo, .matthew, .nathan{
+.bruno, .gustavo, .matthew, .nathan, .uday{
 	width:100%;
 	float:right;
 	margin-left:0;
@@ -273,20 +273,21 @@ header #nav a{display:inline;background:transparent;padding:0;border-bottom:none
 	clear:none;
 	padding-top:1.875em
 }
-.bruno .photo,.gustavo .photo, .matthew .photo, .nathan .photo{
+.bruno .photo,.gustavo .photo, .matthew .photo, .nathan .photo, .uday{
 	max-width:120px;
 	margin:0 auto;
 }
-.bruno h4,.gustavo h4, .matthew h4, .nathan h4{
+.bruno h4,.gustavo h4, .matthew h4, .nathan h4, .uday{
 	text-align:center
 }
 .bruno p:last-of-type,
 .gustavo p:last-of-type,
 .matthew p:last-of-type,
-.nathan p:last-of-type{
+.nathan p:last-of-type,
+.uday p:last-of-type{
 	font:300 .875em/1.6 "ff-meta-serif-web-pro",Georgia,serif;color:#888;margin-bottom:1.5em
 }
-@media (min-width:600px){.bruno,.gustavo,.matthew,.nathan{width:47.05882%;float:left;margin-right:-100%;margin-left:0;clear:none}}
+@media (min-width:600px){.bruno,.gustavo,.matthew,.nathan,.uday{width:47.05882%;float:left;margin-right:-100%;margin-left:0;clear:none}}
 @media (min-width:600px){.gustavo,.nathan{width:47.05882%;float:right;margin-left:0;margin-right:0;clear:none}}
 #process{background:#f4f4f4;padding-bottom:4em}
 #process .diagram{margin:0 auto}
