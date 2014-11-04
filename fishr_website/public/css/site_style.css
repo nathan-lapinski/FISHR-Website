@@ -303,3 +303,13 @@ header #nav a{display:inline;background:transparent;padding:0;border-bottom:none
 .list-bold{
 	font-weight: bold;
 }
+#toggle-arguments{
+	color:#74C1F5;
+	cursor:pointer;
+}
+.hidden-div-fishr-args{
+	display:none;
+}
+.hidden-div-fishr-args strong{
+	font-weight: bold;
+}

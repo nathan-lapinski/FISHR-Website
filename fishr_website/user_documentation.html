@@ -108,6 +108,48 @@ g++ -O2 -o [New GERMLINE Version] -I include GERMLINE_0001.cpp GERMLINE.cpp Shar
 					<li>GL_parameter_finder</li>
 				</ul>
 				<p>Each of these programs are described in more detail in their respective sections of this document. Fishr is responsible for performing the main statistical calculations. Low-Ram is a version of Fishr that is optimized for running in low-memory environments. GL_Parameter_Finder is used for determining certain empirical inputs to the Fishr/Low-Ram programs.</p>
+				<h2>Fishr instructions</h2>
+				<p>ErrorFinderMain (version 23.5 as of this writing) performs a lot of computations. It is run from the command line, and takes a set of files produced by GERMLINE as its input. The files are:</p>
+				<ul>
+					<li>*.bmid</li>
+					<li>*.bsid</li>
+					<li>*.bmatch</li>
+					<li>*.ped</li>
+				</ul>
+				<p>In addition to these files, Fishr also takes several command line arguments.
+ Let’s start by looking at how it can be run from the command line:</p>
+ <pre class="codeblock-wrapper">
+					<code class="documentation-code-block">
+ErrorFinder23.5 -bmatch FISHR.errhigh.bit96.ErrHom2.ErrHet0.Option1.MinCM0.5.gp1.N1k.bmatch -bsid FISHR.errhigh.bit96.ErrHom2.ErrHet0.Option1.MinCM0.5.gp1.N1k.bsid -bmid FISHR.errhigh.bit96.ErrHom2.ErrHet0.Option1.MinCM0.5.gp1.N1k.bmid -reduced 100 2.0 -ped-file /work/KellerLab/mmkeller/Find.Optimal.Pihats/Simulated.Data/Final.Phased.Data2/Beagle.Phased.Group1.1k.ped -window 50 -ma-threshold 0.2 -gap 2 -pct-err-threshold 0.8 -trueCM 6 -trueSNP 500 -count.gap.errors TRUE -PIE.dist.length 3 -output.type finalErrorsOutput -log.file s8v2t1 | gzip > s8v2t1.gz
+					</code>
+				</pre>
+			</br>
+				Click <span id="toggle-arguments">here</span> to display a complete list of the command line arguments that Fishr accepts. Default parameters for certain values are listed in ():
+				<div class="hidden-div-fishr-args"> 
+					<ul>
+					<li><strong>-bmatch:</strong> This is the path to the bmatch file to be used by ErrorFinder.</li>
+					<li><strong>-bsid:</strong> This is the path to the bsid file.</li>
+					<li><strong>-bmid:</strong> This is the path to the bmid file.</li>
+					<li><strong>-ped-file:</strong> This is the path to the ped file.</li>
+					<li><strong>-reduced (snp)(cM):</strong> The reduced option takes two values, the first is the minimum acceptable SNP length, and the second is the minimum acceptable cM length. Every SH will be checked against these values. If a SH has a SNP length OR a cM length below the reduced value, it will be dropped and will not undergo any further processing by ErrorFinder.</li>
+					<li><strong>-window:</strong> This specifies the length in SNPs of the sliding window that is used in the moving averages calculations. We will describe the moving averages algorithm, and why we would want to use it, in more detail in a later section. Generally speaking, a value of 50 snps is used by default.</li>
+					<li><strong>-ma-threshold:</strong> This is also used in moving average calculations. Basically, after processing all TrulyIBD data in the data set, a moving averages value is found for each of those TrulyIBD segments, and is stored in a sorted array. This value (between 0.0 and 1.0) is an index into that array. It is saying, “take the Xth percentile of the trulyIBD moving averages array”.For example, if we have 10 truly ibd ma values sorted as [0.1,0.1,0.2,0.2,0.2,0.5,0.6,0.7,0.8,0.9] then a -ma-threshoold value of 70 will give the 70th percentile value, in this case, 0.6.</li>
+					<li><strong>-empirical-ma-threshold:</strong> Supplying this parameter bypasses the -ma-threshold calculations entirely, and allows you to specify the threshold you wish to use for moving averages without calculating it via truly ibd segments. It should be noted that the use of -ma-threshold and -empirical-ma-threshold are <strong>mutually exclusive</strong>.</li>
+					<li><strong>-gap:</strong> SHs from GERMLINE can be broken up by opposite homozygote SNPs when the underlying segment is IBD due to SNP call errors or to deletions. FISHR looks for same-person SHs that have a gap of K SNPs between them and puts them back together under the assumption that two long SHs that are separated by K or fewer SNPs are likely to be IBD.</li>
+					<li><strong>-trueCM M (6):</strong> M is the length in cM for a SH to be deemed truly IBD (for finding pct-err-threshold; see above). If few SHs are expected to exist in the dataset of this cM length (due to a small sample size or high error SNP data), then M may need to be lt 6. Check the line “No of matches assumed to be IBD for deriving -pct-err-threshold and (if applicable) holdout-threshold” in the log file; if this is fewer than 100, then consider lowering M. However, if M gets too small (e.g., lt 5), then non-IBD SHs begin to be counted, increasing the threshold and resulting in more false positive SH calls</li>
+					<li><strong>-trueSNP N (600):</strong>N is the length in SNPs for a SH to be deemed truly IBD (for finding pct-err-threshold; see above). If few SHs are expected to exist in the dataset of this SNP length (due to a small sample size or high error SNP data), then N may need to be lt 600. Check the line “No of matches assumed to be IBD for deriving -pct-err-threshold and (if applicable) holdout-threshold” in the log file; if this is fewer than 100, then consider lowering N. However, if N gets too small (e.g., lt 400), then non-IBD SHs begin to be counted, increasing the threshold and resulting in more false positive SH calls.</li>
+					<li><strong>-log.file R:</strong>Name of the log file, which outputs parameters, timing, and other relevant information.</li>
+					<li><strong>-output.type S:</strong>Controls what type of output is produced. For most situations, this should be “full”; other options are useful for understanding which SH were dropped and why. [In brackets are the number of SHs assuming 10K SHs following GERMLINE, 8K following consolidation, and 2K that were not dropped. Further, say 500 rows were dropped following holdout step]. S can be any of the following:
+						<ul>
+							<li><strong>finalOutput [default] (aka “Full”)</strong> - Outputs the final called SHs. The columns of this file are pers1, pers2, bp.distance.start, bp.distance.end, no.of.snps.in.match, and cm.distance [2k rows from above; or 1.5k if holdout was used] </li>
+							<li><strong>FullPlusDropped</strong> - Works exactly like full but also includes the SH's that were dropped and the reason for the drop. [8k rows]</li>
+						</ul>
+					</li>
+					<li><strong></strong></li>
+					<li><strong></strong></li>
+					<li><strong></strong></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -115,7 +157,8 @@ g++ -O2 -o [New GERMLINE Version] -I include GERMLINE_0001.cpp GERMLINE.cpp Shar
 		<div class="container">
 			<div class="content">
 				<h2>Fishr Low-RAM</h2>
-				<p>The most up to date version of FISHR can be downloaded here. Older versions can be found on GitHub.</p>
+				<p>Fishr Low-Ram is almost identical to Fishr, with the exception that it has been optimized for low-RAM environments.
+					Specifically, this version will stream data from Germline, as opposed to stroring it in internal data structures, which leads to a substantial savings in RAM. One consequence of this is that data that is outputted is unsorted, so some post-processing will have to be done in a language like Bash or R to sort the results. Note that unless you really need to save RAM, you should use the main version of Fishr.</p>
 			</div>
 		</div>
 	</section>
@@ -123,7 +166,7 @@ g++ -O2 -o [New GERMLINE Version] -I include GERMLINE_0001.cpp GERMLINE.cpp Shar
 		<div class="container">
 			<div class="content">
 				<h2>GL Parameter Finder</h2>
-				<p>The most up to date version of FISHR can be downloaded here. Older versions can be found on GitHub.</p>
+				<p></p>
 			</div>
 		</div>
 	</section>
@@ -151,6 +194,11 @@ $('#stick').sticky();
 		animate: true	
 	});
 $('#intro').backstretch('public/img/cover.jpg');
+</script>
+<script>
+$('#toggle-arguments').click(function(){
+	$('.hidden-div-fishr-args').toggle();
+})
 </script>
 </body>
 </html>
