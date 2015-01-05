@@ -109,7 +109,7 @@ g++ -O2 -o [New GERMLINE Version] -I include GERMLINE_0001.cpp GERMLINE.cpp Shar
 				</ul>
 				<p>Each of these programs are described in more detail in their respective sections of this document. Fishr is responsible for performing the main statistical calculations. Low-Ram is a version of Fishr that is optimized for running in low-memory environments. GL_Parameter_Finder is used for determining certain empirical inputs to the Fishr/Low-Ram programs.</p>
 				<h2>Fishr instructions</h2>
-				<p>ErrorFinderMain (version 23.5 as of this writing) performs a lot of computations. It is run from the command line, and takes a set of files produced by GERMLINE as its input. The files are:</p>
+				<p>ErrorFinderMain (version 24.0 as of this writing) performs a lot of computations. It is run from the command line, and takes a set of files produced by GERMLINE as its input. The files are:</p>
 				<ul>
 					<li>*.bmid</li>
 					<li>*.bsid</li>
@@ -139,10 +139,13 @@ ErrorFinder23.5 -bmatch FISHR.errhigh.bit96.ErrHom2.ErrHet0.Option1.MinCM0.5.gp1
 					<li><strong>-trueCM M (6):</strong> M is the length in cM for a SH to be deemed truly IBD (for finding pct-err-threshold; see above). If few SHs are expected to exist in the dataset of this cM length (due to a small sample size or high error SNP data), then M may need to be lt 6. Check the line “No of matches assumed to be IBD for deriving -pct-err-threshold and (if applicable) holdout-threshold” in the log file; if this is fewer than 100, then consider lowering M. However, if M gets too small (e.g., lt 5), then non-IBD SHs begin to be counted, increasing the threshold and resulting in more false positive SH calls</li>
 					<li><strong>-trueSNP N (600):</strong>N is the length in SNPs for a SH to be deemed truly IBD (for finding pct-err-threshold; see above). If few SHs are expected to exist in the dataset of this SNP length (due to a small sample size or high error SNP data), then N may need to be lt 600. Check the line “No of matches assumed to be IBD for deriving -pct-err-threshold and (if applicable) holdout-threshold” in the log file; if this is fewer than 100, then consider lowering N. However, if N gets too small (e.g., lt 400), then non-IBD SHs begin to be counted, increasing the threshold and resulting in more false positive SH calls.</li>
 					<li><strong>-log.file R:</strong>Name of the log file, which outputs parameters, timing, and other relevant information.</li>
-					<li><strong>-output.type S:</strong>Controls what type of output is produced. For most situations, this should be “full”; other options are useful for understanding which SH were dropped and why. [In brackets are the number of SHs assuming 10K SHs following GERMLINE, 8K following consolidation, and 2K that were not dropped. Further, say 500 rows were dropped following holdout step]. S can be any of the following:
+					<li><strong>-output.type S:</strong>Controls what type of output is produced. For most situations, this should be “full”; other options are useful for understanding which SH were dropped and why. [In brackets are the number of SHs assuming 10K SHs following GERMLINE, 8K following consolidation, and 2K that were not dropped. Further, say 500 rows were dropped following holdout step]. Further stil, this option can be used with newer versions of ErrorFinder to give additiona input files to specify weights for shared haplotypes based on base pair ranges or cM ranges. S can be any of the following:
 						<ul>
 							<li><strong>finalOutput [default] (aka “Full”)</strong> - Outputs the final called SHs. The columns of this file are pers1, pers2, bp.distance.start, bp.distance.end, no.of.snps.in.match, and cm.distance [2k rows from above; or 1.5k if holdout was used] </li>
 							<li><strong>FullPlusDropped</strong> - Works exactly like full but also includes the SH's that were dropped and the reason for the drop. [8k rows]</li>
+							<li><strong>weightedOutput</strong> - Weights SH based on a weighting algorithm</li>
+							<li><strong>weightedOutputBP</strong> - User must also provide an input file that provides a range of basepairs and corresponding weights</li>
+							<li><strong>weightedOutputCM</strong> - Similar to weightedOutputBP, except that the input file contains ranges of cM and their corresponding weights.</li>
 						</ul>
 					</li>
 					<li><strong></strong></li>
